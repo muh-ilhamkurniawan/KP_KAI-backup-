@@ -2,12 +2,11 @@
     include "koneksi.php";
     if(isset($_POST['input'])){
         $nip = $_POST['nip'];
-        $namapgw = $_POST['namapegawai'];
+        $namapgw = $_POST['namakereta'];
         $ttl = $_POST['tgllahir'];
         $rumah = $_POST['alamat'];
-        $division = $_POST['div'];
-        $insert ="insert into Pegawai(NIP, nama, tanggal_lahir, alamat, divisi)
-                values('$nip','$namapgw','$ttl','$rumah','$division')";
+        $insert ="insert into Pegawai(NIP, nama, tanggal_lahir, alamat)
+                values('$nip','$namapgw','$ttl','$rumah')";
         $query = mysqli_query($conn, $insert);
         if ($query){
 ?>

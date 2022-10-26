@@ -1,6 +1,15 @@
 <?php
 include "koneksi.php";
-
+if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+    $url="https://";
+} else {
+    $url="https://";
+    $url.=$_SERVER['HTTP_HOST'];
+    $url.=$_SERVER['REQUEST_URI'];
+    $url;
+}
+$page=$url;
+$sec="23";
 ?>
 <?php
 date_default_timezone_set("Asia/jakarta");
@@ -8,6 +17,7 @@ date_default_timezone_set("Asia/jakarta");
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta http-equiv="refresh" content="<?php echo $sec;?>" URL="<?php echo $page; ?>">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,11 +25,19 @@ date_default_timezone_set("Asia/jakarta");
     <title>Layout Peron</title>
 </head>
 <body>
-<center>
-    <h1>PT KERETA API INDONESIA</h1>
-    <h4>STASIUN PURWOKERTO</h4>
-    <p><?php echo date('l, d-m-Y'); ?></p>
-    <p><b><span id="jam"></span></b></p>
+    <div id="container"></div>
+    <nav>
+        <div class="nav-desc">
+            <div class="logo">
+            <img src="aset/logo.png" class="featured-image" />
+            </div>
+            <div class="stasiun">
+                <h1>STASIUN PURWOKERTO<br/> <i>PURWOKERTO STATION</i></h1>
+            </div>
+        </div>
+        <div class="nav-time">
+        <?php echo date('l, d-m-Y'); ?> <br/> 
+        <b><span id="jam"></span></b>
     <script type="text/javascript">
         window.onload = function() { jam(); }
        
@@ -40,33 +58,35 @@ date_default_timezone_set("Asia/jakarta");
             return e;
         }
     </script>
-    <p> <a href="insert.php">Tambah Data</a></p>
-    <table border="1" align='center' width="1000px" height="400px">
-        <tr align ="center">
-            <td>JALUR</td>
-            <td>NO KA</td>
-            <td>NAMA KA</td>
-            <td>TUJUAN</td>
-            <td>JAM BERANGKAT</td>
+        </div>
+    </nav>
+
+    <table align='center' width="100%" height="300px" cellspacing="4" cellpadding="10">
+        <tr style="background-color: #ee6b1e;">
+            <td>JALUR <br/> <i>TRACK</i></td>
+            <td>NO & NAMA KA</td>
+            <td>RELASI</td>
+            <td>WAKTU BERANGKAT <br/> <i>DEPARTURE TIME</i></td>
         </tr>
     <?php
-        $no = 1;
-        $sql = "select * from Pegawai order by NIP asc";
+        $jalur = 1;
+        $sql = "select * from peron order by jalur asc";
         $query = mysqli_query($conn,$sql);
         while($row = mysqli_fetch_array($query)){
         echo "
         <tr>
-            <td>$no</td>
-            <td>$row[NIP]</td>
-            <td>$row[nama]</td>
-            <td>$row[alamat]</td>
-            <td>$row[tanggal_lahir]</td>
+            <td>$jalur</td>
+            <td>$row[no] - $row[nama]</td>
+            <td>$row[relasi]</td>
+            <td>$row[berangkat]</td>
             </tr>
         ";
-        $no++;
+        $jalur++;
         }
     ?>
     </table>
-</center>
+    <footer>
+        <p><marquee>PT Kereta Api Indonesia (Persero) Daop 5 Purwokerto</marquee></p>
+    </footer>
 </body>
 </html>
