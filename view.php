@@ -11,9 +11,6 @@ if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
 $page=$url;
 $sec="23";
 ?>
-<?php
-date_default_timezone_set("Asia/jakarta");
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +55,8 @@ date_default_timezone_set("Asia/jakarta");
         }
         }
         ?>
-        <?php 
+        <?php
+        date_default_timezone_set("Asia/jakarta"); 
         $hariBahasaInggris = date('l');
         $hariBahasaIndonesia = hariIndo($hariBahasaInggris);
         echo "<span class='hari'>{$hariBahasaIndonesia}</span>";
