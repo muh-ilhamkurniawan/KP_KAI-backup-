@@ -32,12 +32,39 @@ date_default_timezone_set("Asia/jakarta");
             <img src="aset/logo.png" class="featured-image" />
             </div>
             <div class="stasiun">
-                <h1>STASIUN PURWOKERTO<br/> <i>PURWOKERTO STATION</i></h1>
+                STASIUN PURWOKERTO
             </div>
         </div>
         <div class="nav-time">
-        <?php echo date('l, d-m-Y'); ?> <br/> 
-        <b><span id="jam"></span></b>
+        <?php
+        function hariIndo ($hariInggris) {
+        switch ($hariInggris) {
+            case 'Sunday':
+            return 'Minggu';
+            case 'Monday':
+            return 'Senin';
+            case 'Tuesday':
+            return 'Selasa';
+            case 'Wednesday':
+            return 'Rabu';
+            case 'Thursday':
+            return 'Kamis';
+            case 'Friday':
+            return 'Jumat';
+            case 'Saturday':
+            return 'Sabtu';
+            default:
+            return 'hari tidak valid';
+        }
+        }
+        ?>
+        <?php 
+        $hariBahasaInggris = date('l');
+        $hariBahasaIndonesia = hariIndo($hariBahasaInggris);
+        echo "<span class='hari'>{$hariBahasaIndonesia}</span>";
+        ?> <br/> <span style='padding-right: 20px;'> <?php echo date('d-m-Y'); ?></span>
+         <br/> 
+        <span id="jam" class="jam"></span>
     <script type="text/javascript">
         window.onload = function() { jam(); }
        
@@ -60,13 +87,12 @@ date_default_timezone_set("Asia/jakarta");
     </script>
         </div>
     </nav>
-
-    <table align='center' width="100%" height="300px" cellspacing="4" cellpadding="10">
+    <table align='center' width="98%" cellspacing="4" cellpadding="0">
         <tr style="background-color: #ee6b1e;">
-            <td>JALUR <br/> <i>TRACK</i></td>
-            <td>NO & NAMA KA</td>
-            <td>RELASI</td>
-            <td>WAKTU BERANGKAT <br/> <i>DEPARTURE TIME</i></td>
+            <th>JALUR<br/> <i>TRACK</i></th>
+            <th>NO & NAMA KA <br/> <i>KA NUMBER & NAME</i></th>
+            <th>RELASI <br/> <i>RELASI</i></th>
+            <th>WAKTU BERANGKAT <br/> <i>DEPARTURE TIME</i></th>
         </tr>
     <?php
         $jalur = 1;
@@ -75,10 +101,10 @@ date_default_timezone_set("Asia/jakarta");
         while($row = mysqli_fetch_array($query)){
         echo "
         <tr>
-            <td>$jalur</td>
-            <td>$row[no] - $row[nama]</td>
-            <td>$row[relasi]</td>
-            <td>$row[berangkat]</td>
+            <td width='15%'> <span class='isi'><div class='jalur'>$jalur</div> </span></td>
+            <td width='50%'><span class='isi'>$row[no] - $row[nama]</span></td>
+            <td width='15%'><span class='isi'>$row[relasi]</span></td>
+            <td width='20%' ><span class='isi'>$row[berangkat]</span></td>
             </tr>
         ";
         $jalur++;
@@ -86,7 +112,7 @@ date_default_timezone_set("Asia/jakarta");
     ?>
     </table>
     <footer>
-        <p><marquee>PT Kereta Api Indonesia (Persero) Daop 5 Purwokerto</marquee></p>
+        <p><marquee>PT Kereta Api Indonesia (Persero) Daop V Purwokerto</marquee></p>
     </footer>
 </body>
 </html>
