@@ -1,10 +1,10 @@
 body {
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
   align-items: center;
   font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  background-image: url("5.jpg");
+  background-image: url("background.jpg");
   background-size: cover;
 }
 #container {

@@ -62,7 +62,7 @@ $sec="23";
         echo "<span class='hari'>{$hariBahasaIndonesia}</span>";
         ?> <br/> <span style='padding-right: 20px;'> <?php echo date('d-m-Y'); ?></span>
          <br/> 
-        <span id="jam" class="jam"></span>
+        <span id="jam" class="jam" style='padding-right: 20px;'></span>
     <script type="text/javascript">
         window.onload = function() { jam(); }
        
@@ -94,15 +94,15 @@ $sec="23";
         </tr>
     <?php
         $jalur = 1;
-        $sql = "select * from peron order by jalur asc";
+        $sql = "select * from perontampilan order by jalur asc";
         $query = mysqli_query($conn,$sql);
         while($row = mysqli_fetch_array($query)){
         echo "
         <tr>
             <td width='15%'> <span class='isi'><div class='jalur'>$jalur</div> </span></td>
-            <td width='50%'><span class='isi'>$row[no] - $row[nama]</span></td>
-            <td width='15%'><span class='isi'>$row[relasi]</span></td>
-            <td width='20%' ><span class='isi'>$row[berangkat]</span></td>
+            <td width='50%'><span class='isi'>$row[no_ka] - $row[nama_ka]</span></td>
+            <td width='15%'><span class='isi'>$row[tujuan]</span></td>
+            <td width='20%' ><span class='isi'>$row[jam_berangkat]</span></td>
             </tr>
         ";
         $jalur++;
