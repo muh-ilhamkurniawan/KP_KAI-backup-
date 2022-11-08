@@ -27,8 +27,8 @@
                             <div class="card-body">
                                 <!-- membuat form input file -->
                                 <form method="post" enctype="multipart/form-data" action="excel.php">
-                                    Pilih File:
-                                    <input class="form-control" name="fileexcel" type="file" required="required">
+                                    <p>Pilih File: <br><i style="font-size: 12px;">perhatikan bahwa data akan selalu terhapus dengan yang baru</i></p>
+                                     <input class="form-control" name="fileexcel" type="file" required="required">
                                     <br>
                                     <button class="btn btn-sm btn-info" type="submit" name='simpan'>Submit</button>
                                 </form>
@@ -49,7 +49,7 @@
                                     <th scope="col">Relasi</th>
                                     <th scope="col">Jadwal Berangkat</th>
                                     <th scope="col">Jadwal Datang</th>
-                                    <th scope="col">Jumlah</th>
+                                    <th scope="col">Jalur</th>
                                     <th scope="col">Purwokerto Datang</th>
                                     <th scope="col">Purwokerto Berangkat</th>
                                     <th scope="col">Stamformasi</th>
@@ -66,7 +66,7 @@
                                         $no = 1;
             
                                         //mengambil data dari tabel barang
-                                        $select         = mysqli_query($koneksi, "SELECT * FROM departure ORDER BY purwokerto_berangkat LIMIT 5");
+                                        $select         = mysqli_query($koneksi, "SELECT * FROM departure ORDER BY purwokerto_berangkat");
             
                                         //melooping(perulangan) dengan menggunakan while
                                         $no = 1;

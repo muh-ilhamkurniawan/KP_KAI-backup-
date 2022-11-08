@@ -60,7 +60,7 @@ $sec="23";
         $hariBahasaInggris = date('l');
         $hariBahasaIndonesia = hariIndo($hariBahasaInggris);
         echo "<span class='hari'>{$hariBahasaIndonesia}</span>";
-        ?> <br/> <span style='padding-right: 20px;'> <?php echo date('d-m-Y'); ?></span>
+        ?> <br/> <span style='padding-right: 20px;' class='hari'> <?php echo date('d-m-Y'); ?></span>
          <br/> 
         <span id="jam" class="jam" style='padding-right: 20px;'></span>
     <script type="text/javascript">
@@ -88,8 +88,8 @@ $sec="23";
     <table align='center' width="98%" cellspacing="4" cellpadding="0">
         <tr style="background-color: #ee6b1e;">
             <th>JALUR<br/> <i>TRACK</i></th>
-            <th>NO & NAMA KA <br/> <i>KA NUMBER & NAME</i></th>
-            <th>RELASI <br/> <i>RELASI</i></th>
+            <th>NAMA KA <br/> <i>TRAIN NAME</i></th>
+            <th>TUJUAN <br/> <i>DESTINATION</i></th>
             <th>WAKTU BERANGKAT <br/> <i>DEPARTURE TIME</i></th>
         </tr>
     <?php
@@ -110,7 +110,7 @@ $sec="23";
     ?>
     </table>
     <footer>
-        <p><marquee>PT Kereta Api Indonesia (Persero) Daop V Purwokerto</marquee></p>
+        <p><marquee>PT KERETA API INDONESIA (PERSERO) DAOP V PURWOKERTO</marquee></p>
     </footer>
 </body>
 </html>

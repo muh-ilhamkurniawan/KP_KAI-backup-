@@ -5,35 +5,39 @@ body {
   padding: 0;
   background-size: cover;
 }
+h2 {
+  text-align: center;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
 #container {
   min-height: 100%;
   position: relative;
 }
 td {
-  color: white;
-  font-size: 20px;
+  border-bottom: 1px black solid;
 }
 .peron td {
   text-align: center;
-  font-weight: bold;
-  font-size: 30px;
 }
-.jalur {
-  font-size: 68px;
-}
+
 .konten {
   overflow: auto;
   color: black;
   margin-bottom: 10px;
 }
+.upper {
+  text-transform: uppercase;
+}
 .form {
   float: left;
-  width: 25%;
+  width: 30%;
   padding-left: 1%;
+  text-align: center;
 }
 .jadwal {
   float: right;
-  width: 65%;
+  width: 68%;
   padding-right: 1%;
 }
 .isi {
@@ -44,12 +48,10 @@ tr .isi {
   opacity: 1;
 }
 tr {
-  background-color: rgba(5, 6, 112, 0.8);
   text-align: center;
 }
 th {
   background-color: #ee6b1e;
-  font-size: 20px;
 }
 nav {
   overflow: auto;
@@ -65,8 +67,7 @@ i {
   font-weight: lighter;
 }
 .link {
-  width: 100%;
-  padding-bottom: 1%;
+  padding: 1%;
 }
 .logo {
   padding-top: 30px;
@@ -74,6 +75,7 @@ i {
   width: 25%;
   align-items: center;
 }
+
 .stasiun {
   padding-top: 20px;
   text-align: center;
@@ -83,7 +85,7 @@ i {
   font-weight: 800;
 }
 .hari {
-  font-size: 20px;
+  font-size: 28px;
   font-weight: bold;
   padding-right: 20px;
 }
@@ -108,12 +110,44 @@ main {
   vertical-align: middle;
   padding-left: 20px;
 }
+.tombol-hapus {
+  background: #dc3545;
+  color: white;
+  border: 0px;
+  border-radius: 5px;
+  padding: 4px 8px;
+  text-decoration: none;
+}
+.tombol-link {
+  background: #2c97df;
+  color: white;
+  border: 0px;
+  border-radius: 5px;
+  padding: 4px 8px;
+  text-decoration: none;
+}
+
+.table-jadwal {
+  margin: 0 auto;
+  display: block;
+  height: 300px;
+  overflow-y: scroll;
+}
+.klik {
+  background: #2c97df;
+  border-bottom: 0;
+}
+.submit {
+  background: #2c97df;
+  color: white;
+  border: 0px;
+  padding: 5px 10px;
+  text-decoration: none;
+  width: 100%;
+}
 footer {
   margin-top: 10px;
   padding: 0.1px;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.5);
   text-align: center;
   bottom: 0pt;
-  font-weight: bold;
 }

@@ -1,3 +1,8 @@
+<?php
+ini_set("display_errors",0);
+error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
+error_reporting(0);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,8 +50,8 @@
         date_default_timezone_set("Asia/jakarta"); 
         $hariBahasaInggris = date('l');
         $hariBahasaIndonesia = hariIndo($hariBahasaInggris);
-        echo "<span class='hari'>{$hariBahasaIndonesia}</span>";
-        ?> <br/> <span style='padding-right: 20px;'> <?php echo date('d-m-Y'); ?></span>
+        echo "<span class='jam'>{$hariBahasaIndonesia}</span>";
+        ?> <br/> <span style='padding-right: 20px;' class="jam"> <?php echo date('d-m-Y'); ?></span>
          <br/> 
         <span id="jam" class="jam" style='padding-right: 20px;'></span>
     <script type="text/javascript">
@@ -69,42 +74,52 @@
             return e;
         }
     </script>
+    
         </div>
     </nav>
-    <div class="konten">
+    <hr>
+    <div class="link">
+                <a href="view.php" class="tombol-link">Halaman Peron</a> 
+                <a href="modif-data\index.php" class="tombol-link">Modifikasi Data</a> 
+                <a href="modif-data\tambah.php" class="tombol-link">Tambah Data</a> 
+            </div>
+    
+                        <div class="konten">
+                            <h2>Tabel Pemilihan</h2>
         <div class="form">
+        <hr>
         <form action='<?php $_SERVER['PHP_SELF']; ?>' name='update' method='post' enctype='multipart/form-data'>
-            <table class="table-form" width="100%">
+            <table class="table-form" width="100%" cellpadding="5" cellspacing="0">
                 <tr>
-                    <th width='10%'>JALUR</th>
-                    <th width='90%'>NO KA</th>
+                    <th width='30%'>JALUR</th>
+                    <th width='40%'>NO KA</th>
+                    <th width='30%'>Aksi</th>
                 </tr>
                 <tr>
                     <td>1</td>
-                    <td><input type="text" name="jalurka1"></td>
+                    <td><input type="text" name="jalurka1" class="upper"></td>
+                    <td><input type="submit" name="update" value="Simpan" class="tombol-link"></td>
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td><input type="text" name="jalurka2"></td>
+                    <td><input type="text" name="jalurka2" class="upper"></td>
+                    <td><input type="submit" name="update" value="Simpan" class="tombol-link"></td>
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td><input type="text" name="jalurka3"></td>
+                    <td><input type="text" name="jalurka3" class="upper"></td>
+                    <td><input type="submit" name="update" value="Simpan" class="tombol-link"></td>
                 </tr>
                 <tr>
                     <td>4</td>
-                    <td><input type="text" name="jalurka4"></td>
+                    <td><input type="text" name="jalurka4" class="upper"></td>
+                    <td><input type="submit" name="update" value="Simpan" class="tombol-link"></td>
                 </tr>
                 <tr>
                     <td>5</td>
-                    <td><input type="text" name="jalurka5"></td>
-                </tr> 
-                <tr>
-                    <td></td>
-                    <td><input type="submit" name="update" value="Simpan">
-                        <input type="submit" name="hasil" value="Tampilkan Hasil">
-                    </td>
-                </tr>     
+                    <td><input type="text" name="jalurka5" class="upper"></td>
+                    <td><input type="submit" name="update" value="Simpan" class="tombol-link"></td>
+                </tr>   
         </table>          
     </form>
     <?php
@@ -118,77 +133,37 @@
         $jalur5 = $_POST['jalurka5'];
         $update ="UPDATE inputka SET no_ka = (case when jalur = 1 then '$jalur1' when jalur = 2 then '$jalur2' when jalur = 3 then '$jalur3' when jalur = 4 then '$jalur4' when jalur = 5 then '$jalur5' end) WHERE jalur in (1, 2, 3, 4, 5)"; 
         $query = mysqli_query($conn, $update);
-    }
-?>
-        </div>
-        <div class="jadwal">
-            <div class="link" style="float:right">
-                <a href="view.php">Halaman Peron</a> |
-                <a href="modif-data\index.php" >Modifikasi Data</a> |
-            </div>
-        <table class="table-jadwal" style="float:right" width="100%">
-    <thead>
-    <tr>
-        <th width='5%'>No</th>
-        <th width='15%'>No. Kereta</th>
-        <th width='35%'>Nama Kereta</th>
-        <th width='15%'>Relasi</th>
-        <th width='10%'>Datang</th>
-        <th width='10%'>Berangkat</th>
-        <th width='10%'>Aksi</th>
-        </tr>
-    </thead>    
-    <tbody>
-    <?php
-     // membuat koneksi ke database 
-     $koneksi = mysqli_connect("localhost", "root", "", "kai_db");
-            
-    //membuat variabel angka
-     $no = 1;
-            
-    //mengambil data dari tabel barang
-    $select         = mysqli_query($koneksi, "SELECT * FROM departure ORDER BY purwokerto_berangkat LIMIT 5");
-            
-    //melooping(perulangan) dengan menggunakan while
-    $no = 1;
-    while($data= mysqli_fetch_array($select)) :
-    ?>
-    <tr>
-    <!-- menampilkan data dengan menggunakan array  -->
-    <td><?php echo $no++ ?></td>
-    <td><?php echo $data['no_ka']; ?></td>
-    <td><?php echo $data['nama_ka']; ?></td>
-    <td><?php echo $data['relasi']; ?></td>
-    <td><?php echo $data['purwokerto_datang']; ?></td>
-    <td><?php echo $data['purwokerto_berangkat']; ?></td>
-    <td>
-        <a href="delete.php?id=<?php echo $data["nomor"];?>" style="color: white" class="btn btn-danger btn-sm" href="#">
-            <i class="fas fa-trash"></i>
-                Selesai
-        </a> 
-    </td>
-   </tr>
-    <?php endwhile; ?>
-    </tbody>
-    </table>
-        </div>
-    </div>
-    <div class="peron">
-    <?php 
-    $tabel1 = mysqli_fetch_array(mysqli_query($conn, "select * from inputka where no_ka!=' ' "));
+        //penggabungan dengan tampilkan hasil
+
+        $tabel1 = mysqli_fetch_array(mysqli_query($conn, "select * from inputka where no_ka!=' ' "));
         $nokaupdate = $tabel1['no_ka'];
         $jalurupdate = $tabel1['jalur'];
-    if(isset($_POST['hasil'])){
+        
         $tabel2= mysqli_fetch_array(mysqli_query($conn, "select * from departure where no_ka='$nokaupdate' "));
         $no = $tabel2['no_ka'];
         $nama = $tabel2['nama_ka'];
         $tujuan = $tabel2['relasi'];
         $jam = $tabel2['purwokerto_berangkat'];
-
-        $hasil="update hasilka set no_ka='$no', nama_ka='$nama', tujuan ='$tujuan', jam_berangkat='$jam' where jalur='$jalurupdate'";
-        $query = mysqli_query($conn, $hasil);
+        
+        if($nokaupdate=$no){
+            $hasil="update hasilka set no_ka='$no', nama_ka='$nama', tujuan ='$tujuan', jam_berangkat='$jam' where jalur='$jalurupdate'";
+            $query = mysqli_query($conn, $hasil);
+        }else{
+            ?>
+            <script>
+                alert('Maaf Nomor KA yang Dimasukkan Tidak Dapat Ditemukan');
+            </script>
+            <?php
+        }
     }
-
+?>
+        </div>
+        <div class="jadwal">
+        <?php 
+    $tabel1 = mysqli_fetch_array(mysqli_query($conn, "select * from inputka where no_ka!=' ' "));
+        $nokaupdate = $tabel1['no_ka'];
+        $jalurupdate = $tabel1['jalur'];
+    
     if(isset($_POST['delete1'])){
         $hapus = "update hasilka set no_ka='--', nama_ka='--', tujuan ='--', jam_berangkat='--' where jalur = 1";
         $query = mysqli_query($conn, $hapus);
@@ -256,59 +231,54 @@
     $row4 = mysqli_fetch_array(mysqli_query($conn, "select * from hasilka where jalur=4"));
     $row5 = mysqli_fetch_array(mysqli_query($conn, "select * from hasilka where jalur=5"));
         ?>
+        <hr>
         <form action='<?php $_SERVER['PHP_SELF']; ?>' name='update' method='post' enctype='multipart/form-data'>
-                <table align='center' width="98%" >
-                    <tr style="background-color: #ee6b1e;">
-                        <th width="5%">JALUR</th>
+                <table align='center' width="100%" cellpadding="5" cellspacing="0">
+                    <tr>
                         <th width="10%">NO KA</th>
                         <th width="40%">Nama KA</th>
                         <th width="20%">Tujuan</th>
                         <th width="20%">Jam Berangkat</th>
-                        <th width="5%">Aksi</th>
+                        <th width="10%">Aksi</th>
                     </tr>
                     <tr>
-                        <td>1</td>
                         <td><?php echo $row1['no_ka']; ?></td>
                         <td><?php echo $row1['nama_ka']; ?></td>
                         <td><?php echo $row1['tujuan']; ?></td>
                         <td><?php echo $row1['jam_berangkat']; ?></td>
-                        <td><input type="submit" name="delete1" value="Hapus"></td>
+                        <td><input type="submit" name="delete1" value="Hapus" class="tombol-hapus"></td>
                     </tr>
                     <tr>
-                        <td>2</td>
                         <td><?php echo $row2['no_ka']; ?></td>
                         <td><?php echo $row2['nama_ka']; ?></td>
                         <td><?php echo $row2['tujuan']; ?></td>
                         <td><?php echo $row2['jam_berangkat']; ?></td>
-                        <td><input type="submit" name="delete2" value="Hapus"></td>
+                        <td><input type="submit" name="delete2" value="Hapus" class="tombol-hapus"></td>
                     </tr>
                     <tr>
-                        <td>3</td>
                         <td><?php echo $row3['no_ka']; ?></td>
                         <td><?php echo $row3['nama_ka']; ?></td>
                         <td><?php echo $row3['tujuan']; ?></td>
                         <td><?php echo $row3['jam_berangkat']; ?></td>
-                        <td><input type="submit" name="delete3" value="Hapus"></td>
+                        <td><input type="submit" name="delete3" value="Hapus" class="tombol-hapus"></td>
                     </tr>
                     <tr>
-                        <td>4</td>
                         <td><?php echo $row4['no_ka']; ?></td>
                         <td><?php echo $row4['nama_ka']; ?></td>
                         <td><?php echo $row4['tujuan']; ?></td>
                         <td><?php echo $row4['jam_berangkat']; ?></td>
-                        <td><input type="submit" name="delete4" value="Hapus"></td>
+                        <td><input type="submit" name="delete4" value="Hapus" class="tombol-hapus"></td>
                     </tr>
                     <tr>
-                        <td>5</td>
                         <td><?php echo $row5['no_ka']; ?></td>
                         <td><?php echo $row5['nama_ka']; ?></td>
                         <td><?php echo $row5['tujuan']; ?></td>
                         <td><?php echo $row5['jam_berangkat']; ?></td>
-                        <td><input type="submit" name="delete5" value="Hapus"></td>
+                        <td><input type="submit" name="delete5" value="Hapus" class="tombol-hapus"></td>
                     </tr>
                     <tr>
-                        <td colspan="6">
-                            <input type="submit" name="submit" value="SUBMIT">
+                        <td colspan="5" class="klik">
+                            <input type="submit" name="submit" value="SUBMIT" class="submit">
                         </td>
                     </tr>    
             </table>         
@@ -371,9 +341,58 @@
         }
     }
     ?>
+        </div>
+    </div>
+    <div class="peron">
+    
 </div>
-    <footer>
-        <p><marquee>PT Kereta Api Indonesia (Persero) Daop V Purwokerto</marquee></p>
-    </footer>
+<h2>Tabel Data Perjalanan KA</h2>
+        <hr>
+        <table class="table-jadwal" width="75%" cellpadding="9" cellspacing="0">
+    <thead>
+    <tr>
+        <th width='5%'>No</th>
+        <th width='10%'>No. Kereta</th>
+        <th width='35%'>Nama Kereta</th>
+        <th width='15%'>Relasi</th>
+        <th width='5%'>Jalur</th>
+        <th width='10%'>Datang</th>
+        <th width='10%'>Berangkat</th>
+        <th width='10%'>Aksi</th>
+        </tr>
+    </thead>    
+    <tbody>
+    <?php
+     // membuat koneksi ke database 
+     $koneksi = mysqli_connect("localhost", "root", "", "kai_db");
+            
+    //membuat variabel angka
+     $no = 1;
+            
+    //mengambil data dari tabel barang
+    $select         = mysqli_query($koneksi, "SELECT * FROM departure ORDER BY purwokerto_berangkat");
+            
+    //melooping(perulangan) dengan menggunakan while
+    $no = 1;
+    while($data= mysqli_fetch_array($select)) :
+    ?>
+    <tr>
+    <!-- menampilkan data dengan menggunakan array  -->
+    <td><?php echo $no++ ?></td>
+    <td><?php echo $data['no_ka']; ?></td>
+    <td><?php echo $data['nama_ka']; ?></td>
+    <td><?php echo $data['relasi']; ?></td>
+    <td><?php echo $data['jumlah']; ?></td>
+    <td><?php echo $data['purwokerto_datang']; ?></td>
+    <td><?php echo $data['purwokerto_berangkat']; ?></td>
+    <td>
+        <a href="delete.php?id=<?php echo $data["nomor"];?>" class="tombol-hapus" href="#">
+                Selesai
+        </a> 
+    </td>
+   </tr>
+    <?php endwhile; ?>
+    </tbody>
+    </table>
 </body>
 </html>
