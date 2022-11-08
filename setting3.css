@@ -31,13 +31,13 @@ td {
 }
 .form {
   float: left;
-  width: 30%;
+  width: 20%;
   padding-left: 1%;
   text-align: center;
 }
 .jadwal {
   float: right;
-  width: 68%;
+  width: 74%;
   padding-right: 1%;
 }
 .isi {

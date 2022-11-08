@@ -26,9 +26,9 @@
                         <div class="card">
                             <div class="card-body">
                                 <!-- membuat form input file -->
-                                <form method="post" enctype="multipart/form-data" action="excel.php">
-                                    <p>Pilih File: <br><i style="font-size: 12px;">perhatikan bahwa data akan selalu terhapus dengan yang baru</i></p>
-                                     <input class="form-control" name="fileexcel" type="file" required="required">
+                                <form method="post" enctype="multipart/form-data" action="modif-data\index.php">
+                                    Pilih File:
+                                    <input class="form-control" name="fileexcel" type="file" required="required">
                                     <br>
                                     <button class="btn btn-sm btn-info" type="submit" name='simpan'>Submit</button>
                                 </form>
@@ -47,9 +47,6 @@
                                     <th scope="col">No. Kereta</th>
                                     <th scope="col">Nama Kereta</th>
                                     <th scope="col">Relasi</th>
-                                    <th scope="col">Jadwal Berangkat</th>
-                                    <th scope="col">Jadwal Datang</th>
-                                    <th scope="col">Jalur</th>
                                     <th scope="col">Purwokerto Datang</th>
                                     <th scope="col">Purwokerto Berangkat</th>
                                     <th scope="col">Stamformasi</th>
@@ -66,7 +63,7 @@
                                         $no = 1;
             
                                         //mengambil data dari tabel barang
-                                        $select         = mysqli_query($koneksi, "SELECT * FROM departure ORDER BY purwokerto_berangkat");
+                                        $select         = mysqli_query($koneksi, "SELECT * FROM departure ORDER BY purwokerto_berangkat LIMIT 5");
             
                                         //melooping(perulangan) dengan menggunakan while
                                         $no = 1;
@@ -79,9 +76,6 @@
                                     <td><?php echo $data['no_ka']; ?></td>
                                     <td><?php echo $data['nama_ka']; ?></td>
                                     <td><?php echo $data['relasi']; ?></td>
-                                    <td><?php echo $data['jadwal_berangkat']; ?></td>
-                                    <td><?php echo $data['jadwal_datang']; ?></td>
-                                    <td><?php echo $data['jumlah']; ?></td>
                                     <td><?php echo $data['purwokerto_datang']; ?></td>
                                     <td><?php echo $data['purwokerto_berangkat']; ?></td>
                                     <td><?php echo $data['stamformasi']; ?></td>

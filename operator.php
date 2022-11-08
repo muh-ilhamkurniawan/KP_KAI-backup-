@@ -84,16 +84,16 @@ error_reporting(0);
                 <a href="modif-data\tambah.php" class="tombol-link">Tambah Data</a> 
             </div>
     
-                        <div class="konten">
-                            <h2>Tabel Pemilihan</h2>
-        <div class="form">
+            <div class="konten">
+        <h2>Tabel Pemilihan</h2>
         <hr>
+        <div class="form">
         <form action='<?php $_SERVER['PHP_SELF']; ?>' name='update' method='post' enctype='multipart/form-data'>
             <table class="table-form" width="100%" cellpadding="5" cellspacing="0">
                 <tr>
-                    <th width='30%'>JALUR</th>
-                    <th width='40%'>NO KA</th>
-                    <th width='30%'>Aksi</th>
+                    <th width='40%'>JALUR</th>
+                    <th width='20%'>NO KA</th>
+                    <th width='40%'>Aksi</th>
                 </tr>
                 <tr>
                     <td>1</td>
@@ -231,7 +231,6 @@ error_reporting(0);
     $row4 = mysqli_fetch_array(mysqli_query($conn, "select * from hasilka where jalur=4"));
     $row5 = mysqli_fetch_array(mysqli_query($conn, "select * from hasilka where jalur=5"));
         ?>
-        <hr>
         <form action='<?php $_SERVER['PHP_SELF']; ?>' name='update' method='post' enctype='multipart/form-data'>
                 <table align='center' width="100%" cellpadding="5" cellspacing="0">
                     <tr>
@@ -275,72 +274,9 @@ error_reporting(0);
                         <td><?php echo $row5['tujuan']; ?></td>
                         <td><?php echo $row5['jam_berangkat']; ?></td>
                         <td><input type="submit" name="delete5" value="Hapus" class="tombol-hapus"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="5" class="klik">
-                            <input type="submit" name="submit" value="SUBMIT" class="submit">
-                        </td>
-                    </tr>    
+                    </tr> 
             </table>         
         </form>
-    <?php
-    include "koneksi.php";
-    if(isset($_POST['submit'])){
-        $row1 = mysqli_fetch_array(mysqli_query($conn, "select * from hasilka where jalur=1"));
-        $no1 = $row1['no_ka'];
-        $nama1 = $row1['nama_ka'];
-        $tujuan1= $row1['tujuan'];
-        $jam1 = $row1['jam_berangkat'];
-        $jalur1 = $row1['jalur'];
-
-        $row2 = mysqli_fetch_array(mysqli_query($conn, "select * from hasilka where jalur=2"));
-        $no2 = $row2['no_ka'];
-        $nama2= $row2['nama_ka'];
-        $tujuan2 = $row2['tujuan'];
-        $jam2 = $row2['jam_berangkat'];
-        $jalur2 = $row2['jalur'];
-
-        $row3 = mysqli_fetch_array(mysqli_query($conn, "select * from hasilka where jalur=3"));
-        $no3 = $row3['no_ka'];
-        $nama3 = $row3['nama_ka'];
-        $tujuan3 = $row3['tujuan'];
-        $jam3 = $row3['jam_berangkat'];
-        $jalur3 = $row3['jalur'];
-
-        $row4 = mysqli_fetch_array(mysqli_query($conn, "select * from hasilka where jalur=4"));
-        $no4 = $row4['no_ka'];
-        $nama4 = $row4['nama_ka'];
-        $tujuan4 = $row4['tujuan'];
-        $jam4 = $row4['jam_berangkat'];
-        $jalur4 = $row4['jalur'];
-
-        $row5 = mysqli_fetch_array(mysqli_query($conn, "select * from hasilka where jalur=5"));
-        $no5 = $row5['no_ka'];
-        $nama5 = $row5['nama_ka'];
-        $tujuan5 = $row5['tujuan'];
-        $jam5 = $row5['jam_berangkat'];
-        $jalur5 = $row5['jalur'];
-
-        $submit="INSERT INTO perontampilan (jalur, no_ka, nama_ka, tujuan, jam_berangkat)
-                VALUES
-                ('$jalur1', '$no1', '$nama1', '$tujuan1', '$jam1'),
-                ('$jalur2', '$no2', '$nama2', '$tujuan2', '$jam2'),
-                ('$jalur3', '$no3', '$nama3', '$tujuan3', '$jam3'),
-                ('$jalur4', '$no4', '$nama4', '$tujuan4', '$jam4'),
-                ('$jalur5', '$no5', '$nama5', '$tujuan5', '$jam5')
-                ON DUPLICATE KEY UPDATE 
-                jalur = VALUES(jalur), no_ka = VALUES(no_ka),  nama_ka = VALUES(nama_ka), tujuan = VALUES(tujuan), jam_berangkat = VALUES(jam_berangkat)";
-        $query = mysqli_query($conn, $submit);
-        if($query){
-            ?>
-            <script>
-                alert('Data Berhasil Disubmit ke Peron');
-                document.location='operator.php';
-            </script>
-            <?php
-        }
-    }
-    ?>
         </div>
     </div>
     <div class="peron">
@@ -348,6 +284,18 @@ error_reporting(0);
 </div>
 <h2>Tabel Data Perjalanan KA</h2>
         <hr>
+        <div class="col-lg-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <!-- membuat form input file -->
+                                <form method="post" enctype="multipart/form-data" action="modif-data\excel.php">
+                                    Pilih File:
+                                    <input class="form-control" name="fileexcel" type="file" required="required">
+                                    <br>
+                                    <button class="btn btn-sm btn-info" type="submit" name='simpan'>Submit</button>
+                                </form>
+                            </div>
+                        </div>
         <table class="table-jadwal" width="75%" cellpadding="9" cellspacing="0">
     <thead>
     <tr>

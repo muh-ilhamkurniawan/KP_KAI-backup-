@@ -1,7 +1,8 @@
 <?php 
+include "koneksi.php";
             // menghubungkan dengan library excel reader
-            include "excelreader.php";
-            require "excelreader/excel_reader2.php";
+            include "excel_reader.php";
+            //require "excelreader/excel_reader2.php";
             require "excelreader/SpreadsheetReader.php";
             require "excelreader/SpreadsheetReader_XLSX.php";
             require "excelreader/SpreadsheetReader_XLS.php";
@@ -50,5 +51,5 @@
             unlink($_FILES['fileexcel']['name']);
             
             // alihkan halaman ke index.php
-            header("location:index.php");
+            header("location:../operator.php");
             ?>

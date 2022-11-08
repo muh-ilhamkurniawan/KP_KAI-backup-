@@ -94,7 +94,7 @@ $sec="23";
         </tr>
     <?php
         $jalur = 1;
-        $sql = "select * from perontampilan order by jalur asc";
+        $sql = "select * from hasilka order by jalur asc";
         $query = mysqli_query($conn,$sql);
         while($row = mysqli_fetch_array($query)){
         echo "
